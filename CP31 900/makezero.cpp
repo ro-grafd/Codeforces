@@ -1,24 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-void solve ( vector<int>& a, int n)
-{
-    vector<int>pref(n,0);
-    pref[0] = a[0];
-    for(int i =1 ; i < n;i++)
-    {
-        pref[i] = pref[i-1] ^ a[i];
-    }
-    for(int i = 0 ; i < n; i++)
-    {
-        for(int j = i+1 ; j < n; j++)
-        {
-            int length = j - i + 1;
-            
-        }
-    }
-}
-
 int main()
 {
     int tt;
@@ -32,7 +14,19 @@ int main()
         {
             cin >> a[i];
         }
-        solve(a,n);
+        if(n & 1 )
+        {
+            cout << 4 << "\n";
+            cout << 1 << " " << n << "\n";
+            cout << 2 << " " << n << "\n";
+            cout << 1 << " " << 2 << "\n";
+            cout << 1 << " " << 2 << "\n";
+        }else
+        {
+            cout << 2 << "\n";
+            cout << 1 << " " << n << "\n";
+            cout << 1 << " " << n << "\n";
+        }
     }
     return 0;
 }
