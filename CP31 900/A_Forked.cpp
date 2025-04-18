@@ -1,4 +1,4 @@
-#include<bits/stdc++.h>#
+#include<bits/stdc++.h>
 using namespace std;
 
 int main()
@@ -6,6 +6,7 @@ int main()
     int tt;
     int dx[4]= {-1,1,-1,1};
     int dy[4]= {-1,-1,1,1};
+    cin >> tt;
     while(tt--)
     {
         int a,b;
@@ -16,10 +17,10 @@ int main()
         for(int i = 0 ; i < 4; i++)
         {
             s1.insert({x1 + dx[i]*a , y1 + dy[i]*b});
-            s2.insert({x2 + dx[i]*a , y2 + dy[i]*b});
-
             s1.insert({x1 + dx[i]*b , y1 + dy[i]*a});
-            s2.insert({x2 + dx[i]*b , y1 + dy[i]*a});
+            
+            s2.insert({x2 + dx[i]*a , y2 + dy[i]*b});
+            s2.insert({x2 + dx[i]*b , y2 + dy[i]*a});
         }
         int ans = 0;
         for( auto itr : s1)
