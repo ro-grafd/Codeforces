@@ -1,4 +1,4 @@
-#include<iostream>
+#include<bits/stdc++.h>
 using namespace std;
 int main()
 {
@@ -14,7 +14,7 @@ int main()
         }
         else if(n*p >= abs(k))
         {
-            int ans = (abs(k) + p - 1) / p;
+            int ans = ceil(1.0 * abs(k) / p);
             cout << ans << endl;
         }else
         {

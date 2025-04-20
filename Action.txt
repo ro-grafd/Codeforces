@@ -1,0 +1,24 @@
+1) Get very familiar with built-in stl functions of C++
+2) Mathematics to focus on :
+    a) HCF (gcd)
+    b) LCM
+    c) Primes
+    d) Divisors
+    e) Multiples
+    f) modular Arithmatic
+
+
+
+TIPS
+i) NO NEW TOPICS !!!!!
+ii) Implementation skills have to increase
+iii) get to know the standard ad-hoc problems or first principles
+     to get familiar with specific kind of problems
+
+
+
+
+New techniques learnt
+i) gcd(x, y) = gcd(x - y, y) if x > y
+ii) Count and reset technique ( c - k + 1)
+ii) 
