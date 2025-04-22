@@ -21,4 +21,4 @@ iii) get to know the standard ad-hoc problems or first principles
 New techniques learnt
 i) gcd(x, y) = gcd(x - y, y) if x > y
 ii) Count and reset technique ( c - k + 1)
-ii) 
+ii) i | x == x , submask of x or not 
