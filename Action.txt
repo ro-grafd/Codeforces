@@ -6,19 +6,32 @@
     d) Divisors
     e) Multiples
     f) modular Arithmatic
-
+    g) fermet euler torient and modular inverse
 
 
 TIPS
 i) NO NEW TOPICS !!!!!
-ii) Implementation skills have to increase
-iii) get to know the standard ad-hoc problems or first principles
+ii) Implementation skills have to increase via ADHOCS & Greedy
+iii) Get to know the standard ad-hoc problems or first principles
      to get familiar with specific kind of problems
-
-
 
 
 New techniques learnt
 i) gcd(x, y) = gcd(x - y, y) if x > y
 ii) Count and reset technique ( c - k + 1)
-ii) i | x == x , submask of x or not 
+iii) i | x == x , submask of x or not 
+iv) rotate(perm.begin() + left, perm.begin() + right, perm.begin() + right + 1); 
+    rotate(first, mid, last);
+    first: Iterator to the first element in the range.
+    mid: Iterator to the element that becomes the new first element.
+    last: Iterator to the theoretical element just after the last element in the range.
+v) lower_bound(x) in vector,set,multiset... gives the least value that is greater than equal to x or not less than x.
+vi) *s.begin() gives the first value of a Container(vector, set, multiset) similarily *s.rbegin() gives largest
+    *s.end() is NOT the last value, its the value after the last. ( sentinel value *not to be dereferenced*)
+
+
+Questions
+1) Should I still the solution walkthrough even though i managed to solve in contest and upsolve as well??
+2) Currently i am able to solve almost A and B, except those permutation question. You know any resources or question from where i can practice for it?
+3) So now for some C,D questions in CP31 1000 list, I am able to come up with the intuition just because I've grinded LC since 6 months, due to that reason
+   I am using unordered_map,sets, accumulate function as well. So thats fine right ?? or should do with vector<int> itself instead of unordered_map<int, int> for counting and stuff
