@@ -31,60 +31,69 @@ typedef map<ll, ll> mll;
 
 void solve()
 {
-    int n;
+    ll n;
     cin >> n;
-    vll a(n);
-    rep(i, 0, n) cin >> a[i];
-    sort(a.begin(), a.end());
-    vll u;
-    vi c;
-    for (int i = 0; i < n;)
-    {
-        ll d = a[i];
-        int cnt = 0;
-        while (i < n && a[i] == d)
-        {
-            cnt++;
-            i++;
+    ll a[n];
+    rep(i, 0,n) cin >> a[i];
+    sort(a,a+n);
+    vector<ll> v;
+    rep(i, 0, n) {
+        if(i == 0 || a[i] - a[i-1] <= 1){
+            v.push_back(a[i]);
         }
-        u.pb(d);
-        c.pb(cnt);
-    }
-    int m = u.size();
-    bool ok = false;
-    rep(i, 0, m)
-    {
-        if (c[i] >= 4)
-        {
-            ok = true;
-            break;
-        }
-    }
-    
-    if (!ok) {
-        rep(i, 0, m-1)
-        {
-            if (u[i+1] == u[i] + 1 && c[i] >= 2 && c[i+1] >= 2)
-            {
-                ok = true;
-                break;
+        else{
+            vector<ll> u(1,0);
+            rep(j, 0, v.size()) {
+                if(j == 0 || v[j] == v[j-1]) {
+                    u.back()++;
+                }
+                else{
+                    u.push_back(1);
+                }
             }
-        }
-    }
-    
-    if (!ok) {
-        rep(i, 0, m-2)
-        {
-            if (u[i+1] == u[i] + 1 && u[i+2] == u[i] + 2 && c[i] >= 2 && c[i+1] >= 1 && c[i+2] >= 2)
-            {
-                ok = true;
-                break;
+            if(*max_element(u.begin(), u.end()) >= 4){
+                cout << "Yes" << nline ;
+                return;
             }
+            ll cnt = 0;
+            rep(i, 0, u.size()) {
+                if(u[i] > 1) {
+                    cnt++;
+                }
+            }
+            if(cnt >= 2) {
+                cout << "Yes" << nline ;
+                return;
+            }
+            v.assign(1,a[i]);
         }
     }
-    
-    cout << (ok ? "Yes" : "No") << nline;
+ 
+    vector<ll> u(1,0);
+    rep(j, 0, v.size()) {
+        if(j == 0 || v[j] == v[j-1]) {
+            u.back()++;
+        }
+        else{
+            u.push_back(1);
+        }
+    }
+    if(*max_element(u.begin(), u.end()) >= 4){
+        cout << "Yes" << nline ;
+        return;
+    }
+    ll cnt = 0;
+    rep(i,0,u.size()) {
+        if(u[i] > 1) cnt++;
+    }
+    if(cnt >= 2) {
+        cout << "Yes" << nline ;
+        return;
+    }
+ 
+    cout << "No" << nline ;
 }
+// bet on ai day
 int main ()
 {
     fastio();
