@@ -32,27 +32,29 @@ typedef map<ll, ll> mll;
 void solve()
 {
     int n;
-    cin >> n;
+    ll x;
+    cin >> n >> x;
     vll a(n);
-    rep(i, 0, n) cin >> a[i];
-    int result = 0;
-    int left = 0;
-    // Find the total number of peaks in the array, that many number of Clones
-    while(left < n)
+    rep(i,0,n) cin >> a[i];
+    ll low = 1, high = INT_MAX, ans = 1000000;
+    while(low <= high)
     {
-        int right = left;
-        while(right + 1 < n && a[right + 1] == a[left])
+        ll mid = low + (high - low) / 2;
+        ll water = 0;
+        for(int i = 0 ; i < n; i++)
         {
-            right++;
+            water += max(mid - a[i], 0LL);
         }
-        ll peak = a[left];
-        bool first_part = (left == 0) || (a[left-1] < peak);
-        bool second_part = (right == n-1) || (a[right + 1] < peak);
-        if(first_part && second_part)
-            result++;
-        left = right + 1;
+        if(water <= x)
+        {
+            // ans = min(ans, mid);
+            low = mid + 1;
+        }else
+        {
+            high = mid - 1;
+        }
     }
-    cout << result << nline;
+    cout << high << nline;
 }
 int main ()
 {

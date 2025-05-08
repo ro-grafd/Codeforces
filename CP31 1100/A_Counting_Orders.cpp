@@ -33,26 +33,18 @@ void solve()
 {
     int n;
     cin >> n;
-    vll a(n);
+    vll a(n), b(n);
     rep(i, 0, n) cin >> a[i];
-    int result = 0;
-    int left = 0;
-    // Find the total number of peaks in the array, that many number of Clones
-    while(left < n)
+    rep(i, 0, n) cin >> b[i];
+    sort(a.begin(), a.end());
+    sort(b.rbegin(), b.rend());
+    ll res = 1;
+    for(int i = 0 ; i < n; i++)
     {
-        int right = left;
-        while(right + 1 < n && a[right + 1] == a[left])
-        {
-            right++;
-        }
-        ll peak = a[left];
-        bool first_part = (left == 0) || (a[left-1] < peak);
-        bool second_part = (right == n-1) || (a[right + 1] < peak);
-        if(first_part && second_part)
-            result++;
-        left = right + 1;
+        int greater = n - (upper_bound(a.begin(), a.end(), b[i]) - a.begin());
+        res = res * max(0, greater - i) % MOD;
     }
-    cout << result << nline;
+    cout << res << nline;
 }
 int main ()
 {

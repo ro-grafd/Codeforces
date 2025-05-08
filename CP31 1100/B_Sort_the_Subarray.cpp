@@ -13,6 +13,7 @@ const ll INF = LONG_LONG_MAX;
 typedef vector<int> vi;
 typedef vector<ll> vll;
 typedef pair<int, int> pii;
+typedef pair<ll, ll> pll;
 typedef vector<string> vs;
 typedef unordered_map<ll, ll> umll;
 typedef map<ll, ll> mll;
@@ -33,26 +34,23 @@ void solve()
 {
     int n;
     cin >> n;
-    vll a(n);
+    vi a(n), b(n);
     rep(i, 0, n) cin >> a[i];
-    int result = 0;
+    rep(i, 0, n) cin >> b[i];
     int left = 0;
-    // Find the total number of peaks in the array, that many number of Clones
-    while(left < n)
+    int right = n - 1;
+    while(left < right)
     {
-        int right = left;
-        while(right + 1 < n && a[right + 1] == a[left])
+        if(a[left] == b[left]) left++;
+        if(a[right] == b[right]) right--;
+        if(a[left] != b[left] && a[right] != b[right])
         {
-            right++;
+            break;
         }
-        ll peak = a[left];
-        bool first_part = (left == 0) || (a[left-1] < peak);
-        bool second_part = (right == n-1) || (a[right + 1] < peak);
-        if(first_part && second_part)
-            result++;
-        left = right + 1;
     }
-    cout << result << nline;
+    while(left > 0 && a[left - 1] <= b[left]) left--;
+    while(right < n - 1 && a[right + 1] >= b[right]) right++;
+    cout << left + 1 << " " << right + 1 << nline; 
 }
 int main ()
 {

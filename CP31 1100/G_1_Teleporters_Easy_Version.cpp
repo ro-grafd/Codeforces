@@ -1,3 +1,9 @@
+/*==================================================
+  Author    : ASSaASSin
+  Created   : 08-May-2025
+  Purpose   : Competitive Programming Template
+==================================================*/
+
 #include <bits/stdc++.h>
 using namespace std;
 #define Assassin
@@ -13,6 +19,9 @@ const ll INF = LONG_LONG_MAX;
 typedef vector<int> vi;
 typedef vector<ll> vll;
 typedef pair<int, int> pii;
+typedef pair<ll, ll> pll;
+typedef vector<pii> vpii;
+typedef vector<pll> vpll;
 typedef vector<string> vs;
 typedef unordered_map<ll, ll> umll;
 typedef map<ll, ll> mll;
@@ -20,6 +29,8 @@ typedef map<ll, ll> mll;
 #define pb push_back
 #define mp make_pair
 #define nline '\n'
+#define yes cout << "YES" << nline
+#define no cout << "NO" << nline
 #define rep(i, a, b) for(int i = (a); i < (b); i++)
 #define rev(i, a, b) for(int i = (a); i >= (b); i--)
 
@@ -31,28 +42,7 @@ typedef map<ll, ll> mll;
 
 void solve()
 {
-    int n;
-    cin >> n;
-    vll a(n);
-    rep(i, 0, n) cin >> a[i];
-    int result = 0;
-    int left = 0;
-    // Find the total number of peaks in the array, that many number of Clones
-    while(left < n)
-    {
-        int right = left;
-        while(right + 1 < n && a[right + 1] == a[left])
-        {
-            right++;
-        }
-        ll peak = a[left];
-        bool first_part = (left == 0) || (a[left-1] < peak);
-        bool second_part = (right == n-1) || (a[right + 1] < peak);
-        if(first_part && second_part)
-            result++;
-        left = right + 1;
-    }
-    cout << result << nline;
+    
 }
 int main ()
 {

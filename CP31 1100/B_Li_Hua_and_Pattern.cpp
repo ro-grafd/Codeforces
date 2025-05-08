@@ -32,28 +32,43 @@ typedef map<ll, ll> mll;
 void solve()
 {
     int n;
-    cin >> n;
-    vll a(n);
-    rep(i, 0, n) cin >> a[i];
-    int result = 0;
-    int left = 0;
-    // Find the total number of peaks in the array, that many number of Clones
-    while(left < n)
+    ll k;
+    cin >> n >> k;
+    int grid[n][n];
+    rep(i,0,n)
+        rep(j,0,n)
+            cin >> grid[i][j];
+    int times = 0;
+    rep(i,0,n)
+        rep(j,0,n)
+            if(grid[i][j] != grid[n-1-i][n-1-j])
+                times++;
+    times = times / 2;
+    if(times > k)
     {
-        int right = left;
-        while(right + 1 < n && a[right + 1] == a[left])
+        cout << "NO" << nline;
+    }else
+    {
+        k = k - times;
+        if(n % 2) 
         {
-            right++;
+            cout << "YES" << nline;
         }
-        ll peak = a[left];
-        bool first_part = (left == 0) || (a[left-1] < peak);
-        bool second_part = (right == n-1) || (a[right + 1] < peak);
-        if(first_part && second_part)
-            result++;
-        left = right + 1;
+        else if(k % 2)
+        {
+            cout << "NO" << nline;
+        }else
+        {
+            cout << "YES" << nline;
+        }
     }
-    cout << result << nline;
 }
+// k = 6
+// 1 1 1 1 1
+// 1 0 1 1 1        // question is not about matching the original, but creating a grid matches its rotation
+// 1 1 0 1 1        // pattern after rotating central element == central element
+// 1 1 1 1 1
+// 1 1 1 1 1
 int main ()
 {
     fastio();
@@ -65,3 +80,5 @@ int main ()
     }
     return 0;
 }
+
+

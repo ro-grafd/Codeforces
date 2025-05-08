@@ -31,28 +31,18 @@ typedef map<ll, ll> mll;
 
 void solve()
 {
-    int n;
-    cin >> n;
-    vll a(n);
-    rep(i, 0, n) cin >> a[i];
-    int result = 0;
-    int left = 0;
-    // Find the total number of peaks in the array, that many number of Clones
-    while(left < n)
+    int n, k, a, b;
+    cin >> n >> k >> a >> b;
+    vll x(n + 1), y(n + 1);
+    rep(i,1,n+1) cin >> x[i] >> y[i];
+    ll ans = llabs(x[a] - x[b]) + llabs(y[a] - y[b]), min1 = 1e17, min2 = 1e17;
+    for(int i = 1; i <=k; i++)
     {
-        int right = left;
-        while(right + 1 < n && a[right + 1] == a[left])
-        {
-            right++;
-        }
-        ll peak = a[left];
-        bool first_part = (left == 0) || (a[left-1] < peak);
-        bool second_part = (right == n-1) || (a[right + 1] < peak);
-        if(first_part && second_part)
-            result++;
-        left = right + 1;
+        min1 = min(min1, llabs(x[a] - x[i]) + llabs(y[a] - y[i]));
+        min2 = min(min2, llabs(x[b] - x[i]) + llabs(y[b] - y[i]));
     }
-    cout << result << nline;
+    ans = min(ans, min1 + min2);
+    cout << ans << nline;
 }
 int main ()
 {
