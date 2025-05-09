@@ -43,31 +43,14 @@ typedef map<ll, ll> mll;
 void solve()
 {
     ll n;
-    ll c;
-    cin >> n >> c;
-    vll a(n + 1);
-    rep(i,1,n+1)
-    {
-        cin >> a[i];
-        a[i] += i;
-    }
-    ll count = 0, i = 1;
-    sort(a.begin(), a.end());
-    while(i <= n)
-    {
-        ll totalCost = a[i];
-        if(totalCost <= c)
-        {
-            c = c - totalCost;
-            count++;
-        }else
-        {
-            break;
-        }
-        i++;
-    }
-    cout << count << nline;
+    cin >> n;
+    ll demodogs = ((((n * (n+1)) % MOD)* (4*n -1) ) % MOD * 337) % MOD ;
+    cout << demodogs << nline;
 }
+// 1 1 1 
+// 1 1 1 
+// 1 1 1 
+// 1.1 + 1.2 + 2.2 + 2.3 + 3.3 = 22
 int main ()
 {
     fastio();

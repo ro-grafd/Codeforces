@@ -1,6 +1,6 @@
 /*==================================================
   Author    : ASSaASSin
-  Created   : 09-May-2025
+  Created   : 10-May-2025
   Purpose   : Competitive Programming Template
 ==================================================*/
 
@@ -42,31 +42,26 @@ typedef map<ll, ll> mll;
 
 void solve()
 {
-    ll n;
-    ll c;
-    cin >> n >> c;
+    int n;
+    ll l, r;
+    cin >> n >> l >> r;
     vll a(n + 1);
-    rep(i,1,n+1)
+    bool possiblle = true;
+    for(int i = 1; i <= n; i++)
     {
-        cin >> a[i];
-        a[i] += i;
+        a[i] = ((l - 1)/ i + 1) * i;
+        possiblle = possiblle && (a[i] <= r);
     }
-    ll count = 0, i = 1;
-    sort(a.begin(), a.end());
-    while(i <= n)
+    if(!possiblle)
     {
-        ll totalCost = a[i];
-        if(totalCost <= c)
-        {
-            c = c - totalCost;
-            count++;
-        }else
-        {
-            break;
-        }
-        i++;
+        cout << "NO" << nline;
+    }else
+    {
+        cout << "YES" << nline;
+        for(int i = 1; i <= n; i++)
+            cout << a[i] << ' ';
+        cout << nline;
     }
-    cout << count << nline;
 }
 int main ()
 {

@@ -42,31 +42,23 @@ typedef map<ll, ll> mll;
 
 void solve()
 {
-    ll n;
-    ll c;
-    cin >> n >> c;
-    vll a(n + 1);
-    rep(i,1,n+1)
+    int n;
+    cin >> n;
+    vll a(n);
+    ll sum = 0;
+    rep(i,0,n)
     {
         cin >> a[i];
-        a[i] += i;
+        sum += a[i];
     }
-    ll count = 0, i = 1;
-    sort(a.begin(), a.end());
-    while(i <= n)
+    ll ans = 1, prefix = 0;
+    for(int i = 0; i < n - 1; i++)
     {
-        ll totalCost = a[i];
-        if(totalCost <= c)
-        {
-            c = c - totalCost;
-            count++;
-        }else
-        {
-            break;
-        }
-        i++;
+        prefix += a[i];
+        sum -= a[i];
+        ans = max(ans, __gcd(prefix, sum));
     }
-    cout << count << nline;
+    cout << ans << nline;
 }
 int main ()
 {

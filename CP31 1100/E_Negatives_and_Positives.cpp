@@ -39,34 +39,27 @@ typedef map<ll, ll> mll;
 #else
 #define debug(x) ;
 #endif
-
+// TAKE INPUT PROPERLY !!! especially "n"
 void solve()
 {
-    ll n;
-    ll c;
-    cin >> n >> c;
-    vll a(n + 1);
-    rep(i,1,n+1)
+    int n;
+    cin >> n;
+    vll a(n);
+    ll sum = 0, count = 0, mini = INT_MAX;
+    rep(i,0,n)
     {
         cin >> a[i];
-        a[i] += i;
-    }
-    ll count = 0, i = 1;
-    sort(a.begin(), a.end());
-    while(i <= n)
-    {
-        ll totalCost = a[i];
-        if(totalCost <= c)
+        mini = min(mini, abs(a[i]));
+        if(a[i] < 0)
         {
-            c = c - totalCost;
             count++;
-        }else
-        {
-            break;
+            a[i] = -a[i];
         }
-        i++;
+        sum += a[i];
     }
-    cout << count << nline;
+    // sort(a.begin(), a.end());
+    if(count % 2) sum = sum - 2 * mini;
+    cout << sum << nline;
 }
 int main ()
 {
