@@ -30,7 +30,7 @@ vi) *s.begin() gives the first value of a Container(vector, set, multiset) simil
     *s.end() is NOT the last value, its the value after the last. ( sentinel value *not to be dereferenced*)
 vii) XOR(n) (finding xor of [1,n]) is Pattern Based !!!
 ix) __builtin_clz(a) -> count of all bits set to zero before the first "1" bit encountered (in a 32-bit sys)
-
+x) ALWAYS PREFER SET over UNORDERED_SET !!!!
 Questions
 1) Should I still the solution walkthrough even though i managed to solve in contest and upsolve as well??
 2) Currently i am able to solve almost A and B, except those permutation question. You know any resources or question from where i can practice for it?
