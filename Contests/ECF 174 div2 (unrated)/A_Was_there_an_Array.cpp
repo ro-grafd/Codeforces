@@ -1,6 +1,6 @@
 /*==================================================
   Author    : ASSaASSin
-  Created   : 19-July-2025
+  Created   : 21-July-2025
   Purpose   : Competitive Programming Template
 ==================================================*/
 
@@ -94,24 +94,28 @@ void sieve(ll MAX_N)
 
 void solve()
 {
-    int n, k; cin >> n >> k;
-    vll a(n);
-    rep(i, 0, n) cin >> a[i];
-    // 5 x 1e3
-    // O(n2) can work 2.5 x 1e7
-    // 4 2 3 1 3 and k = 2
-    ll ans = 0;
-    if(k > 1)
+    // 1,2,2,2,4,4,4,4 the equality characteristic will be 
+    //   0,1,0,0,1,1
+    int n; cin >> n;
+    int N = n - 2;
+    vi a(N);
+    rep(i, 0, N)
     {
-        sort(a.begin(), a.end(), greater<ll>());
-        ans = accumulate(a.begin(), a.begin() + k + 1, 0LL);
-    }else
-    {
-        ll l = *max_element(a.begin(), a.end() - 1);
-        ll r = *max_element(a.begin() + 1, a.end());
-        ans = max(l + a[n-1], a[0] + r);
+        cin >> a[i];
     }
-    cout << ans << nline;
+    bool ok = true;
+    for(int i = 1; i < N - 1; i++)
+    {
+        if(a[i-1] == 1 && a[i] == 0 && a[i+1] == 1)
+        {
+            ok = false;
+            break;
+        }
+    }
+    if(ok)
+        yes;
+    else
+        no;
 }
 
 signed main()
