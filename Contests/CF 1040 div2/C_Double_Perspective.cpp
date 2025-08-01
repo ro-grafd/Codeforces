@@ -94,7 +94,34 @@ void sieve(ll MAX_N)
 
 void solve()
 {
-    
+    int n; cin >> n;
+    vector<pair<pair<int,int>,int>> a(n);
+    for(auto &[x, y] : a)
+    {
+        cin >> x.first >> x.second;
+        x.second = -x.second;
+    }
+    for(int i = 0; i < n; i++)
+    {
+        a[i].second = i;
+    }
+    sort(a.begin(), a.end());
+    int mn = -1e9;
+    vector<int> ans;
+    for(int i = 0; i < n; i++)
+    {
+        if(a[i].first.first > mn)
+        {
+            mn = a[i].first.first;
+            ans.push_back(a[i].second + 1);
+        }
+    }
+    cout << ans.size() << nline;
+    for(auto &p : ans)
+    {
+        cout << p << ' ';
+    }
+    cout << nline;
 }
 
 signed main()
