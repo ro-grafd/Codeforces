@@ -1,6 +1,6 @@
 /*==================================================
   Author    : ASSaASSin
-  Created   : 26-July-2025
+  Created   : 06-Aug-2025
   Purpose   : Competitive Programming Template
 ==================================================*/
 
@@ -94,35 +94,31 @@ void sieve(ll MAX_N)
 
 void solve()
 {
-    int n, l, r; cin >> n >> l >> r;
-    vi a(n);
-    rep(i, 0, n) cin >> a[i];
-    l--;
-    r--;
-    // int mn = a[l];
-    ll windowSum = 0;
-    for(int i = l; i <= r; i++)
+    int a, b, k; cin >> a >> b >>k;
+    vector<pair<int,int>> couples(k);
+    for(auto& [x, y] : couples)
     {
-        // mn = min(mn, a[i]);
-        windowSum += a[i];
+        cin >> x;
     }
-    ll deltay = 0, deltax = 0;
-    sort(a.begin(), a.begin() + l);
-    sort(a.begin() + l, a.begin() + r + 1);
-    sort(a.begin() + r + 1, a.end());
-    int counter = r + 1;
-    int counterl = 0;
-    for(int i = r; i >= l; i--)
+    for(auto& [x, y] : couples)
     {
-        if(counter < n)
-            deltay += max(0, a[i] - a[counter]);
-        counter++;
-        if(counterl < l)
-            deltax += max(0, a[i] - a[counterl]);
-        counterl++;
+        cin >> y;
     }
-    windowSum = windowSum - max(deltax, deltay);
-    cout << windowSum << nline;
+    vector<int> boyIndegree(a), girlIndgree(b);
+    for(auto& [x, y] : couples)
+    {
+        x--;
+        y--;
+        boyIndegree[x]++;
+        girlIndgree[y]++;
+    }
+    ll ans = 0;
+    for(auto& [x, y] : couples)
+    {
+        ans += (k - boyIndegree[x] - girlIndgree[y] + 1); 
+    }
+    //coz 2 edges we need
+    cout << ans / 2<< nline;
 }
 
 signed main()
