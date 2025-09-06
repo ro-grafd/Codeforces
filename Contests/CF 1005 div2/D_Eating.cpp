@@ -1,6 +1,6 @@
 /*==================================================
   Author    : ASSaASSin
-  Created   : 04-Sept-2025
+  Created   : 06-Sept-2025
   Purpose   : Competitive Programming Template
 ==================================================*/
 
@@ -37,9 +37,18 @@ typedef map<ll, ll> mpll;
 
 #ifdef Assassin
 #define debug(x) cerr << #x << " " << x << endl;
+#define debugv(v) cerr << #v << ": "; for(auto x : v) cerr << x << " "; cerr << endl;
 #else
 #define debug(x) ;
+#define debugv(v) ;
 #endif
+
+// Templates
+template<class T>
+ostream& operator<<(ostream& os, vector<T> v) {
+for(auto x : v) os << x << " ";
+return os;
+}
 
 ll gcd(ll x, ll y)
 {
@@ -94,36 +103,7 @@ void sieve(ll MAX_N)
 
 void solve()
 {
-    int n; cin >> n;
-    vi a(n);
-    map<int, vector<int>> mp;
-    rep(i, 0, n)
-    {
-        cin >> a[i];
-        mp[a[i]].push_back(i);
-    }
-    // 2 3 3 1 2 3 5 1 1 7
-
-    vector<int> dp(n + 1, -1);
-    dp[n] = 0;
-    for(int i = n - 1; i >= 0; i--)
-    {
-        auto& positions = mp[a[i]];
-
-        int startIdx = lower_bound(positions.begin(), positions.end(), i) - positions.begin();
-        int available = positions.size() - startIdx;
-        // 3 -> 1, 2, 5
-        // available = 3 - 0 = 3
-        if(available >= a[i])
-        {
-            int j =  positions[startIdx + a[i] - 1]  + 1;
-            dp[i] = max(dp[i+1], a[i] + dp[j]);
-        }else
-        {
-            dp[i] = dp[i+1];
-        }
-    }
-    cout << dp[0] << nline;
+    
 }
 
 signed main()

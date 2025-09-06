@@ -108,6 +108,7 @@ void solve()
     {
         cout << x << ' ';
     }
+    // debugv(a);
     cout << nline;
 }
 

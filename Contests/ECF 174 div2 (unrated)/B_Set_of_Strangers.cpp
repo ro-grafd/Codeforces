@@ -1,6 +1,6 @@
 /*==================================================
   Author    : ASSaASSin
-  Created   : 04-Sept-2025
+  Created   : 22-June-2025
   Purpose   : Competitive Programming Template
 ==================================================*/
 
@@ -13,8 +13,8 @@ using ll = long long;
 using lld = long double;
 using ull = unsigned long long;
 
-const ll mod = 1e9 + 7;
-const ll inf = LONG_LONG_MAX;
+const ll MOD = 1e9 + 7;
+const ll INF = LONG_LONG_MAX;
 
 typedef vector<int> vi;
 typedef vector<ll> vll;
@@ -23,9 +23,8 @@ typedef pair<ll, ll> pll;
 typedef vector<pii> vpii;
 typedef vector<pll> vpll;
 typedef vector<string> vs;
-typedef unordered_map<ll, ll> umpll;
-typedef map<int, int> mpii;
-typedef map<ll, ll> mpll;
+typedef unordered_map<ll, ll> umll;
+typedef map<ll, ll> mll;
 
 #define pb push_back
 #define mp make_pair
@@ -94,39 +93,44 @@ void sieve(ll MAX_N)
 
 void solve()
 {
-    int n; cin >> n;
-    vi a(n);
-    map<int, vector<int>> mp;
+    int n, m; cin >> n >> m;
+    vector<vector<int>> grid(n, vector<int>(m));
+    vector<int> colors(n*m + 1, 0);
     rep(i, 0, n)
     {
-        cin >> a[i];
-        mp[a[i]].push_back(i);
-    }
-    // 2 3 3 1 2 3 5 1 1 7
-
-    vector<int> dp(n + 1, -1);
-    dp[n] = 0;
-    for(int i = n - 1; i >= 0; i--)
-    {
-        auto& positions = mp[a[i]];
-
-        int startIdx = lower_bound(positions.begin(), positions.end(), i) - positions.begin();
-        int available = positions.size() - startIdx;
-        // 3 -> 1, 2, 5
-        // available = 3 - 0 = 3
-        if(available >= a[i])
+        rep(j, 0, m)
         {
-            int j =  positions[startIdx + a[i] - 1]  + 1;
-            dp[i] = max(dp[i+1], a[i] + dp[j]);
-        }else
-        {
-            dp[i] = dp[i+1];
+            cin >> grid[i][j];
+            // colors[grid[i][j]]++;
         }
     }
-    cout << dp[0] << nline;
+    vector<vector<int>> dir = {{1,0}, {-1,0}, {0, 1}, {0, -1}};
+    for(int i = 0; i < n; i++)
+    {
+        for(int j = 0; j < m; j++)
+        {
+            colors[grid[i][j]] = max(colors[grid[i][j]], 1);
+            for(int d = 0; d < 4; d++)
+            {
+                int newi = i + dir[d][0];
+                int newj = j + dir[d][1];
+                if(newi >= 0 && newj >= 0 && newi < n && newj < m && grid[i][j] == grid[newi][newj])
+                {
+                    colors[grid[i][j]] = 2;
+                }
+            }
+        }
+    }
+    // for(int n : colors)
+    // {
+    //     debug(n);
+    // }
+    int mx = *max_element(colors.begin(), colors.end());
+    int sum = accumulate(colors.begin(), colors.end(),0);
+    cout << sum - mx << nline;
 }
 
-signed main()
+int main()
 {
     fastio();
     const ll MAX_N = 10000000;
