@@ -1,6 +1,6 @@
 /*==================================================
   Author    : ASSaASSin
-  Created   : 24-Sept-2025
+  Created   : 26-Sept-2025
   Purpose   : Competitive Programming Template
 ==================================================*/
 
@@ -100,47 +100,15 @@ void sieve(ll MAX_N)
             primes.pb(i);
     }
 }
-#define int long long
+
 void solve()
 {
-    int n; cin >> n;
-    vi a(n + 1);
-    rep(i, 1, n+1) cin >> a[i];
-    int f = 0;
-    for(int i = 1; i <= n; i++)
-    {
-        if(i & 1) f += a[i];
-        else f -= a[i];
-    }
-    // debug(f);
-    int delta3 = INT_MIN;
-    if(n & 1)
-    {
-        delta3 = n - 1;
-    }else
-    {
-        delta3 = max(delta3, n - 2);
-    }
-    int r = INT_MAX, l = INT_MIN;
-    for(int i = 1; i <= n; i++)
-    {
-        if(i % 2 == 0)
-            l = max(l, 2 * a[i] - i);
-        else
-            r = min(r, 2 * a[i] - i);
-    }
-    int delta1 = l - r;
-    r = INT_MIN, l = INT_MAX;
-    for(int i = 1; i <= n; i++)
-    {
-        if(i % 2 == 0)  
-            r = max(r, 2 * a[i] + i);
-        else
-            l = min(l, 2 * a[i] + i);
-    }
-    int delta2 = r - l;
-    int ans = f + max({delta1, delta2, delta3, 0ll});
-    cout << ans << nline;
+    ll n, m, x , y;
+    cin >> n >> m >> x >> y;
+    vi a(n), b(m);
+    rep(i, 0, n) cin >> a[i];
+    rep(i, 0, m) cin >> b[i];
+    cout << n + m << nline;
 }
 
 signed main()

@@ -1,6 +1,6 @@
 /*==================================================
   Author    : ASSaASSin
-  Created   : 24-Sept-2025
+  Created   : 26-Sept-2025
   Purpose   : Competitive Programming Template
 ==================================================*/
 
@@ -100,46 +100,32 @@ void sieve(ll MAX_N)
             primes.pb(i);
     }
 }
-#define int long long
+
 void solve()
 {
-    int n; cin >> n;
-    vi a(n + 1);
-    rep(i, 1, n+1) cin >> a[i];
-    int f = 0;
-    for(int i = 1; i <= n; i++)
+    ll n, m; cin >> n >> m;
+    // vpii p(n);
+    int currSide, prevSide, currT, prevT;
+    prevSide = 0;
+    prevT = 0;
+    ll ans = 0;
+    rep(i, 0, n)
     {
-        if(i & 1) f += a[i];
-        else f -= a[i];
+        int currT, currSide;
+        cin >> currT >> currSide;
+        int duration = currT - prevT;
+        if(prevSide != currSide)
+        {
+            ans += (duration % 2 == 0) ? duration-1: duration;
+        }else
+        {
+            ans += (duration % 2 == 0) ? duration : duration -1;
+        }
+
+        prevT = currT;
+        prevSide = currSide;
     }
-    // debug(f);
-    int delta3 = INT_MIN;
-    if(n & 1)
-    {
-        delta3 = n - 1;
-    }else
-    {
-        delta3 = max(delta3, n - 2);
-    }
-    int r = INT_MAX, l = INT_MIN;
-    for(int i = 1; i <= n; i++)
-    {
-        if(i % 2 == 0)
-            l = max(l, 2 * a[i] - i);
-        else
-            r = min(r, 2 * a[i] - i);
-    }
-    int delta1 = l - r;
-    r = INT_MIN, l = INT_MAX;
-    for(int i = 1; i <= n; i++)
-    {
-        if(i % 2 == 0)  
-            r = max(r, 2 * a[i] + i);
-        else
-            l = min(l, 2 * a[i] + i);
-    }
-    int delta2 = r - l;
-    int ans = f + max({delta1, delta2, delta3, 0ll});
+    ans += (m - prevT);
     cout << ans << nline;
 }
 
