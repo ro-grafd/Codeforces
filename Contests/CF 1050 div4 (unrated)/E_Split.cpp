@@ -5,28 +5,40 @@ using namespace std;
 void solve() {
     int n, k;
     cin >> n >> k;
-    vector<int> a(n), cnt(n + 1), ct(n + 1);
-    for (int i = 0; i < n; i++) {
+    map<int, int> freq;
+    vector<int> a(n);
+    for(int i = 0; i < n; i++)
+    {
         cin >> a[i];
-        cnt[a[i]]++;
+        freq[a[i]]++;
     }
-    for (int i = 0; i <= n; i++) {
-        if (cnt[i] % k) {
-            return void(cout << 0 << endl);
-        } else {
-            cnt[i] /= k;
+    bool ok = true;
+    for(auto& [key, v] : freq)
+    {
+        if(v % k)
+        {
+            ok = false;
         }
     }
-    int res = 0;
-    for (int l = 0, r = 0; r >= l and r < n; r++) {
-        ct[a[r]]++;
-        while (ct[a[r]] > cnt[a[r]]) {
-            ct[a[l]]--;
+    if(!ok)
+    {
+        cout << 0 << endl;
+        return;
+    }
+    map<int, int> mp;
+    int ans = 0;
+    for(int l = 0, r = 0; l <= r,  r < n; r++)
+    {
+        mp[a[r]]++;
+        // violate condition
+        while(mp[a[r]] > freq[a[r]] / k)
+        {
+            mp[a[l]]--;
             l++;
         }
-        res += (r - l + 1);
+        ans += (r - l + 1);
     }
-    cout << res << endl;
+    cout << ans << endl;
 }
 
 int32_t main() {
