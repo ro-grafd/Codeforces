@@ -1,6 +1,6 @@
 /*==================================================
   Author    : ASSaASSin
-  Created   : 01-Sept-2025
+  Created   : 22-Dec-2025
   Purpose   : Competitive Programming Template
 ==================================================*/
 
@@ -101,40 +101,6 @@ void sieve(ll MAX_N)
     }
 }
 
-void solve()
-{
-    int n; cin >> n;
-    vi p(n);
-    set<int> st;
-    for(int i = 1; i <= n; i++) st.insert(i);
-    rep(i, 0, n)
-    {
-        cin >> p[i];
-        if(p[i])
-            st.erase(p[i]);
-    }
-    for(auto& x : p)
-    {
-        if(!x)
-        {
-            auto itr = st.end();
-            itr--;
-            x = *itr;
-            st.erase(itr);
-        }
-    }
-    int l = n + 1, r = n;
-    for(int i = 0; i < n; i++)
-    {
-        if(p[i] != i + 1)
-        {
-            r = i;
-            l = min(l, i);
-        }
-    }
-    cout << max(0, r - l + 1) << nline;
-
-}
 
 signed main()
 {
@@ -143,9 +109,34 @@ signed main()
     sieve(MAX_N);
     int tt;
     cin >> tt;
-    while(tt--)
+    int t = 1;
+    while(t <= tt)
     {
-        solve();
+        int n, q;
+        cin >> n >> q;
+        string s; cin >> s;
+        int ans = 0;
+        for(int i = 0; i < q; i++)
+        {
+            int l, r;
+            cin >> l >> r;
+            vector<int> hash(26, 0);
+            for(int itr = l - 1; itr <= r - 1; itr++)
+            {
+                hash[s[itr] - 'A']++;
+            }
+            int times = 0;
+            for(int p : hash)
+            {
+                if(p & 1) times++;
+            }
+            if(times <= 1)
+            {
+                ans++;
+            }
+        }
+        cout << "Case #" << t << ": " << ans << endl; 
+        t++;
     }
     return 0;
 }

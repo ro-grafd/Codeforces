@@ -1,6 +1,6 @@
 /*==================================================
   Author    : ASSaASSin
-  Created   : 01-Sept-2025
+  Created   : 01-Jan-2026
   Purpose   : Competitive Programming Template
 ==================================================*/
 
@@ -45,7 +45,7 @@ typedef map<ll, ll> mpll;
 
 // Templates
 template<class T>
-ostream& operator<<(ostream& os, vector<T> v) {
+ostream& operator<<(ostream& os, const vector<T>& v) {
 for(auto x : v) os << x << " ";
 return os;
 }
@@ -104,36 +104,19 @@ void sieve(ll MAX_N)
 void solve()
 {
     int n; cin >> n;
-    vi p(n);
-    set<int> st;
-    for(int i = 1; i <= n; i++) st.insert(i);
-    rep(i, 0, n)
+    vi perm(n);
+    rep(i, 0, n) cin >> perm[i];
+    bool found = true;
+    for(int i = 1; i < n - 1; i++)
     {
-        cin >> p[i];
-        if(p[i])
-            st.erase(p[i]);
-    }
-    for(auto& x : p)
-    {
-        if(!x)
+        if(perm[i-1] > perm[i] && perm[i] < perm[i+1])
         {
-            auto itr = st.end();
-            itr--;
-            x = *itr;
-            st.erase(itr);
+            found = false;
+            break;
         }
     }
-    int l = n + 1, r = n;
-    for(int i = 0; i < n; i++)
-    {
-        if(p[i] != i + 1)
-        {
-            r = i;
-            l = min(l, i);
-        }
-    }
-    cout << max(0, r - l + 1) << nline;
-
+    if(found) yes;
+    else no;
 }
 
 signed main()

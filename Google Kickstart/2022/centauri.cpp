@@ -1,6 +1,6 @@
 /*==================================================
   Author    : ASSaASSin
-  Created   : 01-Sept-2025
+  Created   : 22-Dec-2025
   Purpose   : Competitive Programming Template
 ==================================================*/
 
@@ -101,39 +101,18 @@ void sieve(ll MAX_N)
     }
 }
 
-void solve()
+string solve(string k)
 {
-    int n; cin >> n;
-    vi p(n);
-    set<int> st;
-    for(int i = 1; i <= n; i++) st.insert(i);
-    rep(i, 0, n)
+    int n = k.length();
+    k[n-1] = toupper(k[n-1]);
+    if(k[n-1] == 'A' || k[n-1] == 'E' || k[n-1] == 'I' || k[n-1] == 'O' || k[n-1] == 'U')
     {
-        cin >> p[i];
-        if(p[i])
-            st.erase(p[i]);
-    }
-    for(auto& x : p)
+        return "Alice";
+    }else if(k[n-1] == 'Y')
     {
-        if(!x)
-        {
-            auto itr = st.end();
-            itr--;
-            x = *itr;
-            st.erase(itr);
-        }
+        return "nobody";
     }
-    int l = n + 1, r = n;
-    for(int i = 0; i < n; i++)
-    {
-        if(p[i] != i + 1)
-        {
-            r = i;
-            l = min(l, i);
-        }
-    }
-    cout << max(0, r - l + 1) << nline;
-
+    return "Bob";
 }
 
 signed main()
@@ -143,9 +122,15 @@ signed main()
     sieve(MAX_N);
     int tt;
     cin >> tt;
-    while(tt--)
+    int i = 1;
+    while(i <= tt)
     {
-        solve();
+        string kingdom;
+        cin >> kingdom;
+        string ruler;
+        ruler = solve(kingdom);
+        cout << "Case #" << i << ": " << kingdom << " is ruled by " << ruler << "." << endl;
+        i++;
     }
     return 0;
 }

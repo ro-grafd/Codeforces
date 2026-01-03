@@ -1,6 +1,6 @@
 /*==================================================
   Author    : ASSaASSin
-  Created   : 01-Sept-2025
+  Created   : 03-Jan-2026
   Purpose   : Competitive Programming Template
 ==================================================*/
 
@@ -104,36 +104,39 @@ void sieve(ll MAX_N)
 void solve()
 {
     int n; cin >> n;
-    vi p(n);
-    set<int> st;
-    for(int i = 1; i <= n; i++) st.insert(i);
-    rep(i, 0, n)
+    vector<int> indegree(n + 1, 0), visited(n + 1, 0);
+    vector<vector<int>> adj(n + 1);
+    for(int i = 0; i < n - 1; i++)
     {
-        cin >> p[i];
-        if(p[i])
-            st.erase(p[i]);
-    }
-    for(auto& x : p)
-    {
-        if(!x)
+        int u, v, x, y;
+        cin >> u >> v >> x >> y;
+        if(x < y)
         {
-            auto itr = st.end();
-            itr--;
-            x = *itr;
-            st.erase(itr);
+            indegree[v]++;
+            adj[u].push_back(v);
+        }else
+        {
+            indegree[u]++;
+            adj[v].push_back(u);
         }
     }
-    int l = n + 1, r = n;
-    for(int i = 0; i < n; i++)
+    queue<int> q;
+    for(int i = 1; i <= n; i++)
+        if(indegree[i] == 0) q.push(i);
+    vector<int> ans(n);
+    int counter = 1;
+    while(!q.empty())
     {
-        if(p[i] != i + 1)
+        int u = q.front(); q.pop();
+        ans[u-1] = counter;
+        counter++;
+        for(int neigh : adj[u])
         {
-            r = i;
-            l = min(l, i);
+            indegree[neigh]--;
+            if(indegree[neigh] == 0) q.push(neigh);
         }
     }
-    cout << max(0, r - l + 1) << nline;
-
+    cout << ans << nline;
 }
 
 signed main()

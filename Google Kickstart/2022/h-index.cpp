@@ -1,6 +1,6 @@
 /*==================================================
   Author    : ASSaASSin
-  Created   : 01-Sept-2025
+  Created   : 22-Dec-2025
   Purpose   : Competitive Programming Template
 ==================================================*/
 
@@ -101,39 +101,33 @@ void sieve(ll MAX_N)
     }
 }
 
-void solve()
+vector<int> solve(vector<int>& citations)
 {
-    int n; cin >> n;
-    vi p(n);
-    set<int> st;
-    for(int i = 1; i <= n; i++) st.insert(i);
-    rep(i, 0, n)
+    vector<int> ans;
+    int currH = 0;
+    priority_queue<int, vector<int>, greater<>> pq;
+    
+    for(int i = 0; i < citations.size(); i++)
     {
-        cin >> p[i];
-        if(p[i])
-            st.erase(p[i]);
-    }
-    for(auto& x : p)
-    {
-        if(!x)
+        if(citations[i] > currH)
         {
-            auto itr = st.end();
-            itr--;
-            x = *itr;
-            st.erase(itr);
+            pq.push(citations[i]);
         }
-    }
-    int l = n + 1, r = n;
-    for(int i = 0; i < n; i++)
-    {
-        if(p[i] != i + 1)
+        // We only care about the Cits which are greater than currH
+        while(!pq.empty() && pq.top() <= currH)
         {
-            r = i;
-            l = min(l, i);
+            pq.pop();
         }
+        // Try increasing the currH
+        while(pq.size() >= currH + 1)
+        {
+            currH++;
+            // while(!pq.empty() && pq.top() <= currH)
+            //     pq.pop();
+        }
+        ans.pb(currH);
     }
-    cout << max(0, r - l + 1) << nline;
-
+    return ans;
 }
 
 signed main()
@@ -143,9 +137,21 @@ signed main()
     sieve(MAX_N);
     int tt;
     cin >> tt;
-    while(tt--)
+    int i = 1;
+    while(i <= tt)
     {
-        solve();
+        int n;
+        cin >> n;
+        vector<int> citations(n);
+        rep(i,0,n) cin >> citations[i];
+        
+        cout << "Case #" << i << ": ";
+        for(int p : solve(citations))
+        {
+            cout << p << " ";
+        }
+        cout << endl;
+        i++;
     }
     return 0;
 }

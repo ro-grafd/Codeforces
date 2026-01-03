@@ -1,6 +1,6 @@
 /*==================================================
   Author    : ASSaASSin
-  Created   : 01-Sept-2025
+  Created   : 03-Jan-2026
   Purpose   : Competitive Programming Template
 ==================================================*/
 
@@ -103,37 +103,28 @@ void sieve(ll MAX_N)
 
 void solve()
 {
-    int n; cin >> n;
-    vi p(n);
-    set<int> st;
-    for(int i = 1; i <= n; i++) st.insert(i);
+    int n, k; cin >> n >> k;
+    vi a(n), b(k);
+    ll total = 0;
     rep(i, 0, n)
     {
-        cin >> p[i];
-        if(p[i])
-            st.erase(p[i]);
+        cin >> a[i];
+        total += a[i];
     }
-    for(auto& x : p)
+    rep(i, 0, k) cin >> b[i];
+    sort(a.begin(), a.end());
+    sort(b.begin(), b.end());
+    // 2 3 7 9 18
+    ll id = n;
+    for(int i = 0; i < k; i++)
     {
-        if(!x)
+        id -= b[i];
+        if(id >= 0)
         {
-            auto itr = st.end();
-            itr--;
-            x = *itr;
-            st.erase(itr);
+            total -= a[id];
         }
     }
-    int l = n + 1, r = n;
-    for(int i = 0; i < n; i++)
-    {
-        if(p[i] != i + 1)
-        {
-            r = i;
-            l = min(l, i);
-        }
-    }
-    cout << max(0, r - l + 1) << nline;
-
+    cout << total << nline;
 }
 
 signed main()
